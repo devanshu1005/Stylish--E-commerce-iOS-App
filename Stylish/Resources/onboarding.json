@@ -1,0 +1,17 @@
+[
+  {
+    "image": "Onboarding1",
+    "title": "Choose Products",
+    "description": "Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint."
+  },
+  {
+    "image": "Onboarding2",
+    "title": "Make Payment",
+    "description": "Secure and fast payment experience for all your purchases."
+  },
+  {
+    "image": "Onboarding3",
+    "title": "Get Your Order",
+    "description": "Fast delivery at your doorstep with tracking support."
+  }
+]

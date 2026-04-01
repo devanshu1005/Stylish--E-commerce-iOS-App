@@ -5,7 +5,7 @@ struct SplashView: View {
     
     var body: some View {
         if isActive {
-            DemoView1()
+            OnboardingView()
         } else {
             Image("SplashLogo")
                 .resizable()
