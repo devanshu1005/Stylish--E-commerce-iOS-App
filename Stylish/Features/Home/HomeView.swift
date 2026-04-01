@@ -5,7 +5,14 @@ struct HomeView: View {
     @State private var searchText = ""
     @State private var selectedTab: TabItem = .home
     
-    
+    var sampleCategories: [CategoryItem] = [
+        CategoryItem(title: "Beauty", image: "category1"),
+        CategoryItem(title: "Fashion", image: "category2"),
+        CategoryItem(title: "Kids", image: "category3"),
+        CategoryItem(title: "Mens", image: "category4"),
+        CategoryItem(title: "Womens", image: "category5"),
+        CategoryItem(title: "Electronics", image: "category6")
+    ]
     
     var homeContent: some View {
         VStack(spacing: 0) {
