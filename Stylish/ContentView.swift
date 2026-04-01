@@ -1,10 +1,3 @@
-//
-//  ContentView.swift
-//  Stylish
-//
-//  Created by Rakesh Gupta on 01/04/26.
-//
-
 import SwiftUI
 
 struct ContentView: View {
