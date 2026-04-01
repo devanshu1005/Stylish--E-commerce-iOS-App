@@ -1,28 +1,22 @@
 import SwiftUI
 
 struct SplashView: View {
-    @State private var isActive = false
+    @Binding var currentScreen: AppScreen
     
     var body: some View {
-        if isActive {
-            OnboardingView()
-        } else {
-            Image("SplashLogo")
-                .resizable()
-                .frame(width: 200, height: 80)
-                .foregroundColor(.black)
+        Image("SplashLogo")
+            .resizable()
+            .frame(width: 200, height: 80)
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                     withAnimation {
-                        isActive = true
+                        currentScreen = .onboarding
                     }
                 }
             }
-        }
     }
 }
 
 #Preview {
-    SplashView()
+    SplashView(currentScreen: .constant(.splash))
 }
-

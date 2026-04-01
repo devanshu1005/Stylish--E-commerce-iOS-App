@@ -3,6 +3,7 @@ import SwiftUI
 struct OnboardingView: View {
     
     @State private var currentIndex = 0
+    @Binding var currentScreen: AppScreen
     let onboardingItems: [OnboardingItem] = Bundle.main.decode("onboarding.json")
     
     var body: some View {
@@ -15,7 +16,7 @@ struct OnboardingView: View {
                 Spacer()
                 
                 Button("Skip") {
-                    currentIndex = 2
+                    currentScreen = .login
                 }
                 .font(.system(size: 18, weight: .semibold))
             }
@@ -91,7 +92,7 @@ struct OnboardingView: View {
                     if currentIndex < 2 {
                         currentIndex += 1
                     } else {
-                        print("Go to Home/Login")
+                        currentScreen = .login
                     }
                 }
                 .font(.system(size: 18, weight: .semibold))
@@ -103,5 +104,5 @@ struct OnboardingView: View {
 }
 
 #Preview {
-    OnboardingView()
+    OnboardingView(currentScreen: .constant(.onboarding))
 }
