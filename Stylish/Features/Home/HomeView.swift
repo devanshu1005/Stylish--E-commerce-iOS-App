@@ -5,8 +5,19 @@ struct HomeView: View {
     @State private var searchText = ""
     @State private var selectedTab: TabItem = .home
     
+    
+    
     var homeContent: some View {
-        VStack {
+        VStack(spacing: 0) {
+            
+            HomeNavBar()
+            
+            SearchBarView(text: $searchText)
+                .padding(.horizontal, 16)
+                .padding(.top, 10)
+            
+            FeaturedCategoriesSection(categories: sampleCategories)
+            
             Spacer()
             
             Text("Home")
@@ -19,16 +30,7 @@ struct HomeView: View {
     var body: some View {
         VStack(spacing: 0) {
             
-            // 🔝 Top Section (only for Home)
-            if selectedTab == .home {
-                HomeNavBar()
-                
-                SearchBarView(text: $searchText)
-                    .padding(.horizontal, 16)
-                    .padding(.top, 10)
-            }
-            
-            
+         
             // 🔄 Screen Switching
             ZStack {
                 switch selectedTab {
