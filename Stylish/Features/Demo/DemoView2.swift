@@ -1,13 +1,13 @@
 import SwiftUI
 
-struct DemoView1: View {
+struct DemoView2: View {
     
     var body: some View {
         VStack {
             
             // 🔝 Top Bar
             HStack {
-                Text("1/3")
+                Text("2/3")
                     .font(.system(size: 18, weight: .semibold))
                 
                 Spacer()
@@ -22,7 +22,7 @@ struct DemoView1: View {
             Spacer()
             
             // 🖼 Illustration
-            Image("Onboarding1") // <-- add your asset image
+            Image("Onboarding2") // <-- add your asset image
                 .resizable()
                 .scaledToFit()
                 .frame(height: 300)
@@ -32,7 +32,7 @@ struct DemoView1: View {
             
             // 📝 Title + Description
             VStack(spacing: 12) {
-                Text("Choose Products")
+                Text("Make Payment")
                     .font(.system(size: 24, weight: .bold))
                 
                 Text("Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit.")
@@ -48,17 +48,20 @@ struct DemoView1: View {
             // 🔘 Bottom Controls
             HStack {
                 
+                Text("Prev")
+                    .font(.system(size: 18, weight: .semibold))
+                
                 Spacer()
                 
                 // Page Indicator
                 HStack(spacing: 6) {
-                    Capsule()
-                        .fill(Color.black)
-                        .frame(width: 30, height: 8)
-                    
                     Circle()
                         .fill(Color.gray.opacity(0.3))
                         .frame(width: 8, height: 8)
+                    
+                    Capsule()
+                        .fill(Color.black)
+                        .frame(width: 30, height: 8)
                     
                     Circle()
                         .fill(Color.gray.opacity(0.3))
@@ -78,5 +81,5 @@ struct DemoView1: View {
 }
 
 #Preview {
-    DemoView1()
+    DemoView2()
 }
