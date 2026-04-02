@@ -7,14 +7,12 @@ struct DealOfTheDaySection: View {
     var body: some View {
         VStack(alignment: .leading, spacing: 12) {
             
-            // 🔝 Header
             HStack {
                 Text(deal.title)
                     .font(.system(size: 18, weight: .semibold))
                 
                 Spacer()
-                
-                // ⏳ Timer
+            
                 HStack(spacing: 4) {
                     Image(systemName: "clock")
                         .font(.system(size: 12))

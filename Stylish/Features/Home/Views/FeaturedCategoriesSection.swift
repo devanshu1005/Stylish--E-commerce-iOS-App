@@ -7,8 +7,7 @@ struct FeaturedCategoriesSection: View {
     
     var body: some View {
         VStack(spacing: 12) {
-            
-            // 🔝 Header
+           
             HStack {
                 Text("All Featured")
                     .font(.system(size: 18, weight: .semibold))
@@ -21,7 +20,6 @@ struct FeaturedCategoriesSection: View {
             .padding(.horizontal, 16)
             
             
-            // 🔄 Horizontal Categories
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 16) {
                     ForEach(categories) { item in
@@ -36,7 +34,6 @@ struct FeaturedCategoriesSection: View {
     }
     
     
-    // 🔹 Category Item
     func categoryItemView(item: Category) -> some View {
         VStack(spacing: 6) {
             
@@ -46,7 +43,7 @@ struct FeaturedCategoriesSection: View {
                         .frame(width: 56, height: 56)
                 }
                 .onFailure { _ in
-                    // Optional error handling
+                    //
                 }
                 .resizable()
                 .scaledToFill()
@@ -68,8 +65,6 @@ struct FeaturedCategoriesSection: View {
         }
     }
     
-    
-    // 🔹 Action Button
     func actionButton(title: String, icon: String) -> some View {
         Button {
             print("\(title) tapped")
