@@ -7,29 +7,34 @@ struct HomeView: View {
     @StateObject private var viewModel = HomeViewModel()
     
     var homeContent: some View {
-        VStack(spacing: 0) {
-            
-            HomeNavBar().padding(.top, 30)
-            
-            SearchBarView(text: $searchText)
-                .padding(.horizontal, 16)
-                .padding(.top, 10)
-            
-            FeaturedCategoriesSection(categories: viewModel.categories)
-            
-            if let banners = viewModel.homeData?.banners {
-                        BannerView(banners: banners)
-                    }
-            
-            if let deal = viewModel.homeData?.dealOfTheDay {
-                      DealOfTheDaySection(deal: deal)
-                  }
-            
-            Spacer()
-            
-            Spacer()
-            
+        ScrollView{
+            VStack(spacing: 0) {
+                
+                HomeNavBar()
+                
+                SearchBarView(text: $searchText)
+                    .padding(.horizontal, 16)
+                    .padding(.top, 10)
+                
+                FeaturedCategoriesSection(categories: viewModel.categories)
+                
+                if let banners = viewModel.homeData?.banners {
+                            BannerView(banners: banners)
+                        }
+                
+                if let deal = viewModel.homeData?.dealOfTheDay {
+                          DealOfTheDaySection(deal: deal)
+                      }
+                
+                if let trending = viewModel.homeData?.trendingProducts {
+                                TrendingProductsSection(section: trending)
+                            }
+                
+                Spacer(minLength: 20)
+                
+            }
         }
+       
         .onAppear {
             viewModel.fetchHomeData()
         }

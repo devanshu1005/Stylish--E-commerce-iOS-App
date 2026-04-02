@@ -29,73 +29,17 @@ struct DealOfTheDaySection: View {
             }
             .padding(.horizontal, 16)
             
-            
-            // 🔄 Products Horizontal List
+           
             ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 55) {
+                HStack(spacing: 15) {
                     ForEach(deal.products) { product in
-                        productCard(product: product)
+                        ProductCard(product: product)
                     }
                 }
-                .padding(.horizontal, 40)
+                .padding(.horizontal, 15)
             }
         }
         .padding(.top, 10)
-    }
-    
-    
-    // 🔹 Product Card
-    func productCard(product: Product) -> some View {
-        VStack(alignment: .leading, spacing: 6) {
-            
-            // 🖼 Product Image
-            AsyncImage(url: URL(string: product.image)) { phase in
-                switch phase {
-                case .empty:
-                    ProgressView()
-                        .frame(width: 180, height: 180)
-                    
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                    
-                case .failure:
-                    Color.gray.opacity(0.2)
-                    
-                @unknown default:
-                    EmptyView()
-                }
-            }
-            .frame(width: 180, height: 180)
-            .clipped()
-            .cornerRadius(10)
-            
-            
-            // 🏷 Product Name
-            Text(product.name)
-                .font(.system(size: 12, weight: .medium))
-                .lineLimit(2)
-            
-            
-            // 💰 Price Row
-            HStack(spacing: 6) {
-                Text("₹\(product.price)")
-                    .font(.system(size: 14, weight: .bold))
-                
-                Text("₹\(product.originalPrice)")
-                    .font(.system(size: 12))
-                    .foregroundColor(.gray)
-                    .strikethrough()
-            }
-            
-            
-            // 🔥 Discount
-            Text(product.discount)
-                .font(.system(size: 12, weight: .semibold))
-                .foregroundColor(.red)
-        }
-        .frame(width: 140)
     }
 }
 
