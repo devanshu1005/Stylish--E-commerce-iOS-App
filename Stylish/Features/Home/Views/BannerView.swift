@@ -17,19 +17,16 @@ struct BannerView: View {
         .padding(.top, 10)
     }
     
-    
-    // 🔹 Single Banner Card
     func bannerCard(banner: Banner) -> some View {
         ZStack(alignment: .leading) {
-            
-            // 🖼 Background Image
+          
             KFImage(URL(string: banner.image))
                 .placeholder {
                     ProgressView()
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                 }
                 .onFailure { _ in
-                    // Optional: handle error
+                    //
                 }
                 .resizable()
                 .scaledToFill()
@@ -41,7 +38,6 @@ struct BannerView: View {
                 .cornerRadius(12)
             
             
-            // 🌑 Overlay for readability
             LinearGradient(
                 colors: [Color.black.opacity(0.6), Color.clear],
                 startPoint: .leading,
@@ -50,21 +46,18 @@ struct BannerView: View {
             .cornerRadius(12)
             
             
-            // 📝 Text Content
             VStack(alignment: .leading, spacing: 6) {
                 
                 Text(banner.title)
                     .font(.system(size: 20, weight: .bold))
                     .foregroundColor(.white)
                 
-                // Handle multiline subtitle
                 ForEach(banner.subtitle.components(separatedBy: "\n"), id: \.self) { line in
                     Text(line)
                         .font(.system(size: 12))
                         .foregroundColor(.white)
                 }
-                
-                // 🛍 CTA Button
+              
                 Button {
                     print("CTA tapped")
                 } label: {
