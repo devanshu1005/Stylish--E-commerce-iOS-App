@@ -10,7 +10,7 @@ struct BannerView: View {
                 bannerCard(banner: banner)
             }
         }
-        .frame(height: 200)
+        .frame(height: 190)
         .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
         .padding(.horizontal, 16)
         .padding(.top, 10)

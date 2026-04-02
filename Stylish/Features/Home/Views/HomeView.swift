@@ -17,6 +17,10 @@ struct HomeView: View {
             
             FeaturedCategoriesSection(categories: viewModel.categories)
             
+            if let banners = viewModel.homeData?.banners {
+                        BannerView(banners: banners)
+                    }
+            
             Spacer()
             
             Text("Home")
