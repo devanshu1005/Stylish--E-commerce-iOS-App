@@ -4,15 +4,7 @@ struct HomeView: View {
     
     @State private var searchText = ""
     @State private var selectedTab: TabItem = .home
-    
-    var sampleCategories: [CategoryItem] = [
-        CategoryItem(title: "Beauty", image: "category1"),
-        CategoryItem(title: "Fashion", image: "category2"),
-        CategoryItem(title: "Kids", image: "category3"),
-        CategoryItem(title: "Mens", image: "category4"),
-        CategoryItem(title: "Womens", image: "category5"),
-        CategoryItem(title: "Electronics", image: "category6")
-    ]
+    @StateObject private var viewModel = HomeViewModel()
     
     var homeContent: some View {
         VStack(spacing: 0) {
@@ -23,7 +15,7 @@ struct HomeView: View {
                 .padding(.horizontal, 16)
                 .padding(.top, 10)
             
-            FeaturedCategoriesSection(categories: sampleCategories)
+            FeaturedCategoriesSection(categories: viewModel.categories)
             
             Spacer()
             
@@ -31,6 +23,9 @@ struct HomeView: View {
                 .font(.system(size: 24, weight: .bold))
             
             Spacer()
+        }
+        .onAppear {
+            viewModel.fetchHomeData()
         }
     }
     

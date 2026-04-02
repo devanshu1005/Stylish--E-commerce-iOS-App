@@ -2,7 +2,7 @@ import SwiftUI
 
 struct FeaturedCategoriesSection: View {
     
-    let categories: [CategoryItem]
+    let categories: [Category]
     
     var body: some View {
         VStack(spacing: 12) {
@@ -36,14 +36,37 @@ struct FeaturedCategoriesSection: View {
     
     
     // 🔹 Category Item
-    func categoryItemView(item: CategoryItem) -> some View {
+    func categoryItemView(item: Category) -> some View {
         VStack(spacing: 6) {
             
-            Image(item.image)
-                .resizable()
-                .scaledToFill()
-                .frame(width: 56, height: 56)
-                .clipShape(Circle())
+            AsyncImage(url: URL(string: item.image)) { phase in
+                switch phase {
+                    
+                case .empty:
+                    ProgressView()
+                        .frame(width: 56, height: 56)
+                    
+                case .success(let image):
+                    image
+                        .resizable()
+                        .scaledToFill()
+                        .frame(width: 56, height: 56)
+                        .clipShape(Circle())
+                    
+                case .failure:
+                    // ❌ Fallback UI
+                    Image(systemName: "photo")
+                        .resizable()
+                        .scaledToFit()
+                        .padding(12)
+                        .frame(width: 56, height: 56)
+                        .background(Color.gray.opacity(0.2))
+                        .clipShape(Circle())
+                    
+                @unknown default:
+                    EmptyView()
+                }
+            }
             
             Text(item.title)
                 .font(.system(size: 10))
@@ -76,10 +99,10 @@ struct FeaturedCategoriesSection: View {
 
 #Preview {
     FeaturedCategoriesSection(categories: [
-        CategoryItem(title: "Beauty", image: "category1"),
-        CategoryItem(title: "Fashion", image: "category2"),
-        CategoryItem(title: "Kids", image: "category3"),
-        CategoryItem(title: "Mens", image: "category4"),
-        CategoryItem(title: "Womens", image: "category5")
+        Category(id: 1, title: "Beauty", image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348"),
+        Category(id: 2, title: "Fashion", image: "category2"),
+        Category(id: 3, title: "Kids", image: "category3"),
+        Category(id: 4, title: "Mens", image: "category4"),
+        Category(id: 5, title: "Womens", image: "category5")
     ])
 }
