@@ -107,7 +107,6 @@ struct LoginView: View {
             .padding(.top, 30)
             
             
-            // 🔘 Social Buttons
             HStack(spacing: 10) {
                 
                 SocialButton(image: "google") {
@@ -129,7 +128,6 @@ struct LoginView: View {
             Spacer()
             
             
-            // 🆕 Sign Up
             HStack {
                 Spacer()
                 

@@ -23,7 +23,7 @@ struct BottomNavBar: View {
                 
                 tabItem(icon: "heart", title: "Wishlist", tab: .wishlist)
                 
-                Spacer(minLength: 10) // space for center button
+                Spacer(minLength: 10)
                 
                 tabItem(icon: "magnifyingglass", title: "Search", tab: .search)
                 
@@ -32,7 +32,6 @@ struct BottomNavBar: View {
             .padding(.horizontal, 20)
             
             
-            // 🛒 Floating Cart Button
             VStack {
                 Button {
                     selectedTab = .cart
@@ -45,14 +44,12 @@ struct BottomNavBar: View {
                         .shadow(color: .black.opacity(0.15), radius: 6, y: 2)
                 }
                 .offset(y: -25)
-                
-//                Spacer()
+             
             }
         }
     }
     
     
-    // 🔹 Tab Item Builder
     func tabItem(icon: String, title: String, tab: TabItem) -> some View {
         Button {
             selectedTab = tab

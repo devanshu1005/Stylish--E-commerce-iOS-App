@@ -39,17 +39,11 @@ struct HomeView: View {
                 
             }
         }
-       
-//        .onAppear {
-//            viewModel.fetchHomeData()
-//        }
     }
     
     var body: some View {
         VStack(spacing: 0) {
             
-         
-            // 🔄 Screen Switching
             ZStack {
                 switch selectedTab {
                 case .home:
@@ -69,8 +63,6 @@ struct HomeView: View {
             
             BottomNavBar(selectedTab: $selectedTab)
         }.onAppear {
-            print("appeared \(count) times")
-            count += 1
             viewModel.fetchHomeData()
         }
         .ignoresSafeArea(edges: .bottom)

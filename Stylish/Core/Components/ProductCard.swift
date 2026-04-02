@@ -9,15 +9,14 @@ struct ProductCard: View {
     
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            
-            // 🖼 Product Image
+           
             KFImage(URL(string: product.image))
                 .placeholder {
                     ProgressView()
                         .frame(width: width, height: height)
                 }
                 .onFailure { _ in
-                    // You can handle error here if needed
+                   //
                 }
                 .resizable()
                 .scaledToFill()
@@ -34,13 +33,11 @@ struct ProductCard: View {
                 .cornerRadius(10)
             
             
-            // 🏷 Product Name
             Text(product.name)
                 .font(.system(size: 12, weight: .medium))
                 .lineLimit(2)
             
             
-            // 💰 Price Row
             HStack(spacing: 6) {
                 Text("₹\(product.price)")
                     .font(.system(size: 14, weight: .bold))
@@ -52,7 +49,6 @@ struct ProductCard: View {
             }
             
             
-            // 🔥 Discount
             Text(product.discount)
                 .font(.system(size: 12, weight: .semibold))
                 .foregroundColor(.red)
