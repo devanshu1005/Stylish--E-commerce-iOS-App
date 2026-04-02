@@ -9,7 +9,7 @@ struct HomeView: View {
     var homeContent: some View {
         VStack(spacing: 0) {
             
-            HomeNavBar()
+            HomeNavBar().padding(.top, 30)
             
             SearchBarView(text: $searchText)
                 .padding(.horizontal, 16)
@@ -21,12 +21,14 @@ struct HomeView: View {
                         BannerView(banners: banners)
                     }
             
+            if let deal = viewModel.homeData?.dealOfTheDay {
+                      DealOfTheDaySection(deal: deal)
+                  }
+            
             Spacer()
             
-            Text("Home")
-                .font(.system(size: 24, weight: .bold))
-            
             Spacer()
+            
         }
         .onAppear {
             viewModel.fetchHomeData()
