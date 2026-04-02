@@ -1,41 +1,27 @@
 import SwiftUI
 import Kingfisher
 
-struct BannerView: View {
+struct OfferBannerSection: View {
     
-    let banners: [Banner]
+    let banner: OfferBanner
     
     var body: some View {
-        TabView {
-            ForEach(banners, id: \.id) { banner in
-                bannerCard(banner: banner)
-            }
-        }
-        .frame(height: 190)
-        .tabViewStyle(PageTabViewStyle(indexDisplayMode: .automatic))
-        .padding(.horizontal, 16)
-        .padding(.top, 10)
-    }
-    
-    
-    // 🔹 Single Banner Card
-    func bannerCard(banner: Banner) -> some View {
         ZStack(alignment: .leading) {
             
             // 🖼 Background Image
-            KFImage(URL(string: banner.image))
+            KFImage(URL(string: banner.image)).fade(duration: 0.25)
                 .placeholder {
                     ProgressView()
-                        .frame(maxWidth: .infinity, maxHeight: .infinity)
+                        .frame(height: 160)
                 }
                 .onFailure { _ in
-                    // Optional: handle error
+                    // Optional: handle error if needed
                 }
                 .resizable()
                 .scaledToFill()
-                .frame(height: 189)
+                .frame(height: 160)
                 .background(
-                    Color.gray.opacity(0.3)
+                    Color.gray.opacity(0.2)
                 )
                 .clipped()
                 .cornerRadius(12)
@@ -50,23 +36,19 @@ struct BannerView: View {
             .cornerRadius(12)
             
             
-            // 📝 Text Content
+            // 📝 Content
             VStack(alignment: .leading, spacing: 6) {
                 
                 Text(banner.title)
-                    .font(.system(size: 20, weight: .bold))
+                    .font(.system(size: 18, weight: .bold))
                     .foregroundColor(.white)
                 
-                // Handle multiline subtitle
-                ForEach(banner.subtitle.components(separatedBy: "\n"), id: \.self) { line in
-                    Text(line)
-                        .font(.system(size: 12))
-                        .foregroundColor(.white)
-                }
+                Text(banner.subtitle)
+                    .font(.system(size: 12))
+                    .foregroundColor(.white)
                 
-                // 🛍 CTA Button
                 Button {
-                    print("CTA tapped")
+                    print("Offer CTA tapped")
                 } label: {
                     HStack(spacing: 4) {
                         Text(banner.cta)
@@ -76,7 +58,7 @@ struct BannerView: View {
                     }
                     .foregroundColor(.white)
                     .padding(.horizontal, 10)
-                    .frame(height: 32)
+                    .frame(height: 30)
                     .overlay(
                         RoundedRectangle(cornerRadius: 6)
                             .stroke(Color.white, lineWidth: 1)
@@ -86,17 +68,18 @@ struct BannerView: View {
             }
             .padding(.leading, 16)
         }
+        .padding(.horizontal, 16)
+        .padding(.top, 10)
     }
 }
 
 #Preview {
-    BannerView(banners: [
-        Banner(
-            id: 1,
-            title: "50-40% OFF",
-            subtitle: "Now in jeans\nAll colours",
-            image: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da",
-            cta: "Shop Now"
+    OfferBannerSection(
+        banner: OfferBanner(
+            title: "Flat and Heels",
+            subtitle: "Stand a chance to get rewarded",
+            image: "https://images.unsplash.com/photo-1582142306909-195724d0d16b",
+            cta: "Visit now"
         )
-    ])
+    )
 }

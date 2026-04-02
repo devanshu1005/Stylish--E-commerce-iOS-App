@@ -1,4 +1,5 @@
 import SwiftUI
+import Kingfisher
 
 struct ProductCard: View {
     
@@ -10,32 +11,27 @@ struct ProductCard: View {
         VStack(alignment: .leading, spacing: 6) {
             
             // 🖼 Product Image
-            AsyncImage(url: URL(string: product.image)) { phase in
-                switch phase {
-                case .empty:
+            KFImage(URL(string: product.image))
+                .placeholder {
                     ProgressView()
                         .frame(width: width, height: height)
-                    
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                    
-                case .failure:
+                }
+                .onFailure { _ in
+                    // You can handle error here if needed
+                }
+                .resizable()
+                .scaledToFill()
+                .frame(width: width, height: height)
+                .background(
                     ZStack {
                         Color.gray.opacity(0.2)
                         
                         Image(systemName: "photo")
                             .foregroundColor(.gray)
                     }
-                    
-                @unknown default:
-                    EmptyView()
-                }
-            }
-            .frame(width: width, height: height)
-            .clipped()
-            .cornerRadius(10)
+                )
+                .clipped()
+                .cornerRadius(10)
             
             
             // 🏷 Product Name

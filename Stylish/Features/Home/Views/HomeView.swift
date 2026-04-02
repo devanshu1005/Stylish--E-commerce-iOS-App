@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct HomeView: View {
+    @State private var count = 0
     
     @State private var searchText = ""
     @State private var selectedTab: TabItem = .home
@@ -26,6 +27,10 @@ struct HomeView: View {
                           DealOfTheDaySection(deal: deal)
                       }
                 
+                if let offer = viewModel.homeData?.offerBanner {
+                    OfferBannerSection(banner: offer)
+                }
+                
                 if let trending = viewModel.homeData?.trendingProducts {
                                 TrendingProductsSection(section: trending)
                             }
@@ -35,9 +40,9 @@ struct HomeView: View {
             }
         }
        
-        .onAppear {
-            viewModel.fetchHomeData()
-        }
+//        .onAppear {
+//            viewModel.fetchHomeData()
+//        }
     }
     
     var body: some View {
@@ -62,8 +67,11 @@ struct HomeView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             
             
-            // 🔻 Bottom Bar (always visible)
             BottomNavBar(selectedTab: $selectedTab)
+        }.onAppear {
+            print("appeared \(count) times")
+            count += 1
+            viewModel.fetchHomeData()
         }
         .ignoresSafeArea(edges: .bottom)
         .background(Color(.systemGray6))

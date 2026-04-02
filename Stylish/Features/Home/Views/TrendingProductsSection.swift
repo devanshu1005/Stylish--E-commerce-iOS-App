@@ -25,9 +25,9 @@ struct TrendingProductsSection: View {
             .padding(.horizontal, 16)
             
             
-            LazyVGrid(columns: columns, spacing: 12) {
+            LazyVGrid(columns: columns, spacing: 15) {
                 ForEach(section.products) { product in
-                    ProductCard(product: product)
+                    ProductCard(product: product, width: 170, height: 170)
                 }
             }
             .padding(.horizontal, 16)
@@ -39,10 +39,12 @@ struct TrendingProductsSection: View {
 #Preview {
     TrendingProductsSection(
         section: ProductSection(
-            title: "Trending Products",
+            title: "Trending Productsss",
             date: "Last Date 29/02/22",
             products: [
-                Product(id: 1, name: "Watch", image: "https://images.unsplash.com/photo-1583394838336-acd977736f90", price: 650, originalPrice: 1599, discount: "60% OFF")
+                Product(id: 1, name: "Watch", image: "https://images.unsplash.com/photo-1583394838336-acd977736f90", price: 650, originalPrice: 1599, discount: "60% OFF"),
+                Product(id: 2, name: "Watch", image: "https://images.unsplash.com/photo-1583394838336-acd977736f90", price: 650, originalPrice: 1599, discount: "60% OFF"),
+                Product(id: 3, name: "Watch", image: "https://images.unsplash.com/photo-1583394838336-acd977736f90", price: 650, originalPrice: 1599, discount: "60% OFF")
             ]
         )
     )

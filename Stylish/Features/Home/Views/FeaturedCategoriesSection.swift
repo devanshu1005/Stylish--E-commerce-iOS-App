@@ -1,4 +1,5 @@
 import SwiftUI
+import Kingfisher
 
 struct FeaturedCategoriesSection: View {
     
@@ -39,34 +40,26 @@ struct FeaturedCategoriesSection: View {
     func categoryItemView(item: Category) -> some View {
         VStack(spacing: 6) {
             
-            AsyncImage(url: URL(string: item.image)) { phase in
-                switch phase {
-                    
-                case .empty:
+            KFImage(URL(string: item.image))
+                .placeholder {
                     ProgressView()
                         .frame(width: 56, height: 56)
-                    
-                case .success(let image):
-                    image
-                        .resizable()
-                        .scaledToFill()
-                        .frame(width: 56, height: 56)
-                        .clipShape(Circle())
-                    
-                case .failure:
-                    // ❌ Fallback UI
+                }
+                .onFailure { _ in
+                    // Optional error handling
+                }
+                .resizable()
+                .scaledToFill()
+                .frame(width: 56, height: 56)
+                .background(
                     Image(systemName: "photo")
                         .resizable()
                         .scaledToFit()
                         .padding(12)
                         .frame(width: 56, height: 56)
                         .background(Color.gray.opacity(0.2))
-                        .clipShape(Circle())
-                    
-                @unknown default:
-                    EmptyView()
-                }
-            }
+                )
+                .clipShape(Circle())
             
             Text(item.title)
                 .font(.system(size: 10))
