@@ -1,17 +1,20 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State private var count = 0
     
     @State private var searchText = ""
     @State private var selectedTab: TabItem = .home
     @StateObject private var viewModel = HomeViewModel()
+    @State private var showMenu = false
+    @State private var offset: CGFloat = -300
     
     var homeContent: some View {
         ScrollView{
             VStack(spacing: 0) {
                 
-                HomeNavBar()
+                HomeNavBar(onMenuTap: {
+                    openMenu()
+                })
                 
                 SearchBarView(text: $searchText)
                     .padding(.horizontal, 16)
@@ -41,34 +44,88 @@ struct HomeView: View {
         }
     }
     
+    // MARK: - Main Body
+    
     var body: some View {
-        VStack(spacing: 0) {
+        ZStack {
             
-            ZStack {
-                switch selectedTab {
-                case .home:
-                    homeContent
-                case .wishlist:
-                    WishlistView()
-                case .cart:
-                    CartView()
-                case .search:
-                    SearchScreenView()
-                case .settings:
-                    SettingsView()
-                }
+            // MAIN CONTENT
+            VStack(spacing: 0) {
+                
+                ZStack {
+                    switch selectedTab {
+                    case .home:
+                        homeContent
+                    case .wishlist:
+                        WishlistView()
+                    case .cart:
+                        CartView()
+                    case .search:
+                        SearchScreenView()
+                    case .settings:
+                        SettingsView()
+                    }
+                } .frame(maxWidth: .infinity, maxHeight: .infinity)
+                
+                BottomNavBar(selectedTab: $selectedTab)
+            }.onAppear {
+                viewModel.fetchHomeData()
             }
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .disabled(showMenu)
             
+            // DIM BACKGROUND
+            if showMenu {
+                Color.black.opacity(0.3)
+                    .ignoresSafeArea()
+                    .onTapGesture {
+                        closeMenu()
+                    }
+            }
             
-            BottomNavBar(selectedTab: $selectedTab)
-        }.onAppear {
-            viewModel.fetchHomeData()
+            // SIDE MENU
+            HStack {
+                SideMenuView()
+                    .frame(width: 300)
+                    .offset(x: offset)
+                
+                Spacer()
+            }
         }
-        .ignoresSafeArea(edges: .bottom)
-        .background(Color(.systemGray6))
+        .gesture(
+                   DragGesture()
+                       .onChanged { value in
+                           if value.translation.width < 0 {
+                               offset = max(value.translation.width, -300)
+                           }
+                       }
+                       .onEnded { value in
+                           if value.translation.width < -100 {
+                               closeMenu()
+                           } else {
+                               openMenu()
+                           }
+                       }
+               )
+    }
+    
+    // MARK: - functions
+    
+    private func openMenu() {
+        withAnimation {
+            showMenu = true
+            offset = 0
+        }
+    }
+
+    private func closeMenu() {
+        withAnimation {
+            showMenu = false
+            offset = -300
+        }
     }
 }
+
+
 
 
 #Preview {

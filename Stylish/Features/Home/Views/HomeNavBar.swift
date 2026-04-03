@@ -3,12 +3,14 @@ import SwiftUI
 
 struct HomeNavBar: View {
     
+    var onMenuTap: () -> Void
+    
     var body: some View {
         HStack {
             
             // 🔘 Left Menu Button
             Button {
-                print("Menu tapped")
+                onMenuTap()  
             } label: {
                 ZStack {
                     Circle()
@@ -45,6 +47,6 @@ struct HomeNavBar: View {
     }
 }
 
-#Preview {
-    HomeNavBar()
-}
+//#Preview {
+//    HomeNavBar()
+//}
